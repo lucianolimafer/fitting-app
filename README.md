@@ -6,11 +6,7 @@ A React Native + Node.js demo that lets users try on clothing and lipstick color
 
 ## Preview
 
-<!-- Replace the block below with your screen recording or GIF -->
-
-https://github.com/user-attachments/assets/YOUR_VIDEO_ID_HERE
-
-> Record your screen with **QuickTime → File → New Screen Recording** (or `xcrun simctl io booted recordVideo demo.mp4`), then drag the file into a GitHub issue to get the upload URL, and paste it above.
+https://github.com/user-attachments/assets/37cb6b92-9624-43ac-a027-a132e44ccee2
 
 ---
 
