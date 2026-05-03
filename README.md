@@ -6,6 +6,7 @@ A React Native + Node.js demo that lets users try on clothing and lipstick color
 
 ## Preview
 
+https://github.com/user-attachments/assets/37cb6b92-9624-43ac-a027-a132e44ccee2
 
 ---
 
