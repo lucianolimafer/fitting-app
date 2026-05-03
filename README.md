@@ -35,7 +35,7 @@ flowchart TD
     G --> O[Animated image transition]
     O --> P{Error?}
     P -->|Yes| Q[Shows error + Retry button]
-    P -->|No| R([Done ✓])
+    P -->|No| R([Done])
     Q --> E
 ```
 
@@ -45,29 +45,29 @@ flowchart TD
 
 ```mermaid
 graph LR
-    subgraph mobile["📱 mobile/ — Expo / React Native"]
+    subgraph mobile["mobile — Expo / React Native"]
         direction TB
         App["App.tsx\nSafeAreaProvider"]
         App --> Root["VirtualFittingRoomApp"]
-        Root --> Hook["useTryOn()\nbusiness logic & state"]
-        Root --> Studio["StudioScreen\nUI & animations"]
+        Root --> Hook["useTryOn — business logic + state"]
+        Root --> Studio["StudioScreen — UI + animations"]
         Root --> TabBar["TryOnTabBar\nproduct switcher"]
         Studio --> Swatch["ColorSwatch\nanimated pill"]
         Studio --> Backdrop["TopLinearBackdrop\nSVG gradient"]
         Hook --> Service["tryOnApi.ts\nfetch wrapper"]
     end
 
-    subgraph server["🖥️ server/ — Node.js / Express"]
+    subgraph server["server — Node.js / Express"]
         direction TB
         Express["Express :3001"]
         Express --> Route["POST /api/recolor-preview"]
-        Route --> Sharp["sharp\nconvert to PNG buffer"]
-        Sharp --> OpenAI["OpenAI images.edit()"]
-        OpenAI --> Response["base64 PNG → JSON"]
+        Route --> Sharp["sharp — PNG buffer"]
+        Sharp --> OpenAI["OpenAI images.edit"]
+        OpenAI --> Response["base64 PNG response"]
     end
 
-    subgraph theme["🎨 Shared design"]
-        Tokens["theme/tokens.ts\ncolors · spacing · radius · type"]
+    subgraph theme["Shared design system"]
+        Tokens["theme/tokens.ts\ncolors, spacing, radius, typography"]
     end
 
     Service -- "HTTP JSON" --> Express
@@ -85,29 +85,29 @@ sequenceDiagram
     actor User
     participant UI as StudioScreen
     participant Hook as useTryOn
-    participant Cache as Preview Cache (ref)
-    participant API as tryOnApi.ts
-    participant Server as Express :3001
+    participant Cache as PreviewCache
+    participant API as tryOnApi
+    participant Server as Express
     participant OAI as OpenAI API
 
     User->>UI: Tap color swatch
     UI->>Hook: onSelectColor(colorId)
-    Hook->>Cache: Check cache key "productId:colorId"
+    Hook->>Cache: lookup productId + colorId
     alt Cache hit
-        Cache-->>Hook: Cached base64 URI
-        Hook-->>UI: setGeneratedPreviewUris(...)
+        Cache-->>Hook: cached base64 URI
+        Hook-->>UI: update preview image
     else Cache miss
-        Hook->>API: recolorPreviewWithAI({ color, prompt, productId, targetType })
+        Hook->>API: recolorPreviewWithAI(color, prompt, productId, targetType)
         API->>Server: POST /api/recolor-preview
-        Server->>Server: Load source PNG (sharp)
-        Server->>OAI: images.edit({ model, image, prompt })
-        OAI-->>Server: { b64_json }
-        Server-->>API: { imageDataUrl: "data:image/png;base64,..." }
+        Server->>Server: load source PNG via sharp
+        Server->>OAI: images.edit(model, image, prompt)
+        OAI-->>Server: b64_json
+        Server-->>API: imageDataUrl as base64 PNG
         API-->>Hook: RecolorPreviewResponse
-        Hook->>Cache: Store result
-        Hook-->>UI: setGeneratedPreviewUris(...)
+        Hook->>Cache: store result
+        Hook-->>UI: update preview image
     end
-    UI-->>User: Animated image transition
+    UI-->>User: animated image transition
 ```
 
 ---

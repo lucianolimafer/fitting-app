@@ -3,7 +3,11 @@
   "compilerOptions": {
     "strict": true,
     "noEmit": true,
-    "moduleResolution": "bundler"
+    "jsx": "react-native",
+    "lib": ["DOM", "ESNext"],
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "target": "ESNext"
   },
   "include": [
     "App.tsx",
