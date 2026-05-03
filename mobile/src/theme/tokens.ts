@@ -1,0 +1,56 @@
+export const theme = {
+  colors: {
+    ink: '#221915',
+    text: '#2d221d',
+    muted: '#76665d',
+    mutedStrong: '#5b4e48',
+    accent: '#ff6b4a',
+    accentDeep: '#ea5330',
+    accentSoft: '#ffd7cb',
+    peach: '#f7c0ad',
+    sand: '#f4efe9',
+    panel: '#fbf6f1',
+    line: 'rgba(86, 54, 40, 0.14)',
+    lineStrong: 'rgba(86, 54, 40, 0.22)',
+    frosted: 'rgba(255, 247, 241, 0.18)',
+    frostedStrong: 'rgba(255, 247, 241, 0.32)',
+    shadow: 'rgba(92, 43, 29, 0.16)',
+    cream: '#f8f4ee',
+    success: '#5b7c57',
+    error: '#b64a2b',
+    warmBlack: '#1b1715',
+  },
+  spacing: {
+    xs: 6,
+    sm: 10,
+    md: 16,
+    lg: 24,
+    xl: 32,
+  },
+  radius: {
+    sm: 14,
+    md: 22,
+    lg: 30,
+    xl: 38,
+    full: 999,
+  },
+  typography: {
+    eyebrow: 12,
+    label: 13,
+    body: 15,
+    title: 18,
+    heading: 26,
+    hero: 52,
+  },
+} as const;
+
+export const shadow = {
+  shadowColor: '#5c2b1d',
+  shadowOffset: {
+    width: 0,
+    height: 16,
+  },
+  shadowOpacity: 0.12,
+  shadowRadius: 26,
+  elevation: 7,
+} as const;
